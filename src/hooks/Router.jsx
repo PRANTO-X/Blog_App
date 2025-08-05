@@ -1,17 +1,20 @@
-import { createBrowserRouter} from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 import { App } from '../App.jsx'
-import Home from '../components/Home.jsx'
-import ShowBlog from '../components/ShowBlog.jsx'
-import CreateBlog from '../components/CreateBlog.jsx'
+import { lazy } from 'react'
+
+// Lazy-loaded components
+const Home = lazy(() => import('../components/Home.jsx'))
+const CreateBlog = lazy(() => import('../components/CreateBlog.jsx'))
+const ShowBlog = lazy(() => import('../components/ShowBlog.jsx'))
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
-      { index: true, element: <Home /> },                        
-      { path: 'create', element: <CreateBlog /> },               
-      { path: 'blog/:id', element: <ShowBlog /> },               
+      { index: true, element: <Home /> },
+      { path: 'create', element: <CreateBlog /> },
+      { path: 'blog/:id', element: <ShowBlog /> }
     ]
   }
-]);
+])

@@ -20,6 +20,7 @@ const ShowBlog = () => {
       <div className="max-w-6xl mx-auto">
         <div className="lg:h-[500px] w-full overflow-hidden rounded-lg mb-8">
           <img
+            loading='lazy'
             src={blog.img}
             alt={blog.title}
             className="w-full h-full object-cover"
