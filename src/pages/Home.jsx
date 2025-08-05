@@ -1,15 +1,15 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 import { Helmet } from 'react-helmet';
 import BlogList from '../components/blog/BlogList';
 
 const Home = () => {
+
+  useEffect(() => {
+  document.title = 'Home | My Blog App';
+}, []);
+
   return (
     <>    
-      <Helmet>
-        <title>Home | My Blog App</title>
-        <meta name="description" content="Welcome to our blog app where you can explore and manage blogs." />
-      </Helmet>
-
       <div className='bg-purple-700 min-h-[70vh] flex justify-center items-center'>
         <div className="container px-6 mx-auto text-center space-y-3.5">
           <h1 className='uppercase text-3xl md:text-5xl text-white font-bold'>Welcome to our blog app</h1>
