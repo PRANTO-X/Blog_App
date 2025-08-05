@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { BlogContext } from '../hooks/BlogProvider'
+import { BlogContext } from '../contexts/BlogProvider'
 import { useNavigate } from 'react-router-dom';
 const CreateBlog = () => {
 

@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import blogs from '../assets/assets';
+import blogs from '../api/mockApi';
 
 const BlogContext = createContext();
 

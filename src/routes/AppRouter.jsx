@@ -3,9 +3,9 @@ import { App } from '../App.jsx'
 import { lazy } from 'react'
 
 // Lazy-loaded components
-const Home = lazy(() => import('../components/Home.jsx'))
-const CreateBlog = lazy(() => import('../components/CreateBlog.jsx'))
-const ShowBlog = lazy(() => import('../components/ShowBlog.jsx'))
+const Home = lazy(() => import('../pages/Home.jsx'))
+const CreateBlog = lazy(() => import('../pages/CreateBlog.jsx'))
+const ShowBlog = lazy(() => import('../pages/ShowBlog.jsx'))
 
 export const router = createBrowserRouter([
   {

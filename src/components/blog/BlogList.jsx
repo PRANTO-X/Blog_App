@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaEye, FaTrash } from 'react-icons/fa';
-import { Helmet } from 'react-helmet';
-import { BlogContext } from '../hooks/BlogProvider';
+import { BlogContext } from '../../contexts/BlogProvider';
 
-const Home = () => {
-  const { blogs, deleteBlog } = useContext(BlogContext);
+const BlogList = () => {
+     const { blogs, deleteBlog } = useContext(BlogContext);
 
   const handleDelete = (id) => {
     if (confirm("Are you sure you want to delete this blog?")) {
@@ -14,21 +13,7 @@ const Home = () => {
   };
 
   return (
-    <>
-      
-      <Helmet>
-        <title>Home | My Blog App</title>
-        <meta name="description" content="Welcome to our blog app where you can explore and manage blogs." />
-      </Helmet>
-
-      <div className='bg-purple-700 min-h-[70vh] flex justify-center items-center'>
-        <div className="container px-6 mx-auto text-center space-y-3.5">
-          <h1 className='uppercase text-3xl md:text-5xl text-white font-bold'>Welcome to our blog app</h1>
-          <p className='text-white md:text-lg'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quisquam quae magni facilis sapiente reprehenderit.</p>
-        </div>
-      </div>
-
-      <div className="container px-6 mx-auto py-12">
+     <div className="container px-6 mx-auto py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {
             blogs?.length > 0 ? (
@@ -79,8 +64,7 @@ const Home = () => {
 
         </div>
       </div>
-    </>
-  );
-};
+  )
+}
 
-export default Home;
+export default BlogList
