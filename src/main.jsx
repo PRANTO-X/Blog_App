@@ -10,6 +10,6 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
    <BlogProvider>
     <RouterProvider router={router} />
-   </BlogProvider>
+   </BlogProvider>  
   </StrictMode>,
 )

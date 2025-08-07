@@ -1,1 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
+
+body{
+    font-family: "Inter", sans-serif;
+    @apply bg-slate-50;
+}
+
+@layer components{
+    .social-icon{
+        @apply flex items-center justify-center w-8 h-8 rounded-full border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white transition-colors duration-300
+    }
+}

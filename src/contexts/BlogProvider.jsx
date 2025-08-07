@@ -20,12 +20,9 @@ const BlogContext = createContext();
     ]);
   };
 
-  const deleteBlog = (id)=>{
-    setBlogsState(prev=>prev.filter(blog=> blog.id !== id));
-  }
 
   return (
-    <BlogContext.Provider value={{ blogs: blogsState, addBlog,deleteBlog }}>
+    <BlogContext.Provider value={{ blogs: blogsState, addBlog}}>
       {children}
     </BlogContext.Provider>
   );

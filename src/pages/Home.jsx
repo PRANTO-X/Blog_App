@@ -1,6 +1,6 @@
 import React ,{useEffect} from 'react';
-import { Helmet } from 'react-helmet';
 import BlogList from '../components/blog/BlogList';
+import TrendingBlogs from '../components/blog/TrendingBlogs';
 
 const Home = () => {
 
@@ -9,17 +9,27 @@ const Home = () => {
 }, []);
 
   return (
-    <>    
-      <div className='bg-purple-700 min-h-[70vh] flex justify-center items-center'>
-        <div className="container px-6 mx-auto text-center space-y-3.5">
-          <h1 className='uppercase text-3xl md:text-5xl text-white font-bold'>Welcome to our blog app</h1>
-          <p className='text-white md:text-lg'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quisquam quae magni facilis sapiente reprehenderit.</p>
-        </div>
+  <div className='container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 space-y-10'>  
+  {/* Trending BLogs */}  
+    <div>
+      <div className="flex items-center gap-3.5  border-l-4 border-indigo-600 pl-2 mb-6">
+        <h2 className='text-2xl md:text-3xl font-bold'>Trending Blogs</h2>
+        <span className='border-1 flex-1 border-indigo-600'></span>
       </div>
+      <TrendingBlogs/>
+    </div>
+    
 
-     {/* Blog list */}
+    {/* Blog list */}
+    <div>
+      <div className="flex items-center gap-3.5  border-l-4 border-indigo-600 pl-2 mb-6">
+      <h2 className='text-2xl md:text-3xl font-bold'>All Blogs</h2>
+      <span className='border-1 flex-1 border-indigo-600'></span>
+    </div>
+
      <BlogList/>
-    </>
+    </div>
+    </div>
   );
 };
 

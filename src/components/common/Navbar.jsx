@@ -1,19 +1,161 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import {FaFacebook,FaTwitter,FaInstagramSquare,FaYoutube,FaArrowRight,FaArrowLeft} from 'react-icons/fa';
+import { RiMenu2Fill } from 'react-icons/ri';
+import { RxCross2 } from 'react-icons/rx';
 
 const Navbar = () => {
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const scrollRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const categoryList = [
+    'All',
+    'Technology',
+    'Economy',
+    'AI',
+    'Job & Careers',
+    'Entertainment',
+    'Culture',
+    'Sports',
+    'World',
+    'Health',
+    'Politics',
+    'Business',
+  ];
+
+  // Scroll logic
+  const updateScrollButtons = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 0);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+  };
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    updateScrollButtons();
+    el.addEventListener('scroll', updateScrollButtons);
+    window.addEventListener('resize', updateScrollButtons);
+
+    return () => {
+      el.removeEventListener('scroll', updateScrollButtons);
+      window.removeEventListener('resize', updateScrollButtons);
+    };
+  }, []);
+
+  const scroll = (direction) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const amount = 150;
+    el.scrollBy({ left: direction === 'left' ? -amount : amount, behavior: 'smooth' });
+  };
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.classList.toggle('overflow-hidden', mobileMenu);
+    return () => document.body.classList.remove('overflow-hidden');
+  }, [mobileMenu]);
+
   return (
-    <header className='fixed top-0 left-0 right-0 py-4 bg-purple-700 z-50'>
-      <nav className=' container mx-auto px-6 flex justify-between items-center'>
-        <div className="">
-          <Link to='/' className='text-white text-2xl font-bold'>BlogApp</Link>
+    <header className="py-5 flex flex-col gap-5 md:gap-8">
+      {/* Top Navbar */}
+      <nav className="container mx-auto px-4 max-w-7xl sm:px-6 lg:px-8 flex justify-between items-center">
+        <ul className="hidden md:flex gap-5 items-center">
+          <li><a href="" className="social-icon"><FaFacebook /></a></li>
+          <li><a href="" className="social-icon"><FaInstagramSquare /></a></li>
+          <li><a href="" className="social-icon"><FaTwitter /></a></li>
+          <li><a href="" className="social-icon"><FaYoutube /></a></li>
+        </ul>
+        <div>
+          <Link to="/" className="text-slate-800 text-2xl md:text-3xl lg:text-4xl font-bold">
+            Blog<span className="text-indigo-600">App</span>
+          </Link>
         </div>
-
-        <Link className='text-xl bg-cyan-400 text-white px-5 py-2 rounded-lg' to='/create'>Create</Link>
+        <Link className="md:text-xl bg-indigo-600 text-white px-5 py-2 rounded-lg" to="/create">
+          Create
+        </Link>
       </nav>
-    </header>
-  )
-}
 
-export default Navbar
+      {/* Categories Bar */}
+      <div className="border-y border-indigo-600">
+        <div className="container mx-auto px-4 max-w-7xl sm:px-6 lg:px-8 relative">
+          <RiMenu2Fill
+            onClick={() => setMobileMenu(true)}
+            className="sm:hidden my-2.5 size-6 text-indigo-600"
+          />
+
+          {/* Arrows */}
+          {canScrollLeft && (
+            <button
+              onClick={() => scroll('left')}
+              className="lg:hidden absolute top-1/2 -translate-y-1/2 left-0 size-6 rounded-full bg-indigo-600 flex justify-center items-center z-10"
+            >
+              <FaArrowLeft className="text-white text-sm" />
+            </button>
+          )}
+          {canScrollRight && (
+            <button
+              onClick={() => scroll('right')}
+              className="lg:hidden absolute top-1/2 -translate-y-1/2 right-0 size-6 rounded-full bg-indigo-600 flex justify-center items-center z-10"
+            >
+              <FaArrowRight className="text-white text-sm" />
+            </button>
+          )}
+
+          <ul
+            ref={scrollRef}
+            className="gap-6 lg:gap-0 hidden sm:flex lg:justify-between py-3.5 overflow-x-auto items-center whitespace-nowrap no-scrollbar scroll-smooth"
+          >
+            {categoryList.map((link, index) => (
+              <li key={index}>
+                <a
+                  className="font-bold hover:text-indigo-600 transition duration-300"
+                  href=""
+                >
+                  {link}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileMenu && (
+        <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity duration-300" />
+      )}
+
+      <div
+        className={`${
+          mobileMenu ? 'translate-x-0' : '-translate-x-full'
+        } sm:hidden transition-transform duration-300 ease-in-out fixed left-0 top-0 bottom-0 w-80 max-w-[90vh] min-h-screen bg-white z-[100]`}
+      >
+        <div>
+          <div className="flex items-center justify-between pb-5 p-5">
+            <h3 className="text-xl text-indigo-600 font-bold">Menu</h3>
+            <RxCross2 onClick={() => setMobileMenu(false)} className="text-2xl" />
+          </div>
+
+          <div className="border-t border-gray-300 p-6">
+            <h4 className="uppercase text-gray-600 mb-4">Categories</h4>
+            <ul className="flex flex-col gap-4.5 pl-2.5 overflow-y-auto no-scrollbar">
+              {categoryList.map((link, index) => (
+                <li key={index}>
+                  <a className="hover:text-indigo-600 transition duration-300" href="">
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;

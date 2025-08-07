@@ -1,70 +1,73 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FaEye, FaTrash } from 'react-icons/fa';
 import { BlogContext } from '../../contexts/BlogProvider';
 
 const BlogList = () => {
-     const { blogs, deleteBlog } = useContext(BlogContext);
-
-  const handleDelete = (id) => {
-    if (confirm("Are you sure you want to delete this blog?")) {
-      deleteBlog(id);
-    }
-  };
+  const { blogs } = useContext(BlogContext);
 
   return (
-     <div className="container px-6 mx-auto py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {
-            blogs?.length > 0 ? (
-              blogs.map((item) => (
-                <div key={item.id} className="bg-white shadow-lg rounded-lg overflow-hidden transition hover:shadow-xl cursor-pointer">
-                  {/* Image */}
-                  <div className="h-60 w-full overflow-hidden">
-                    <img
-                      loading='lazy'
-                      src={item.img}
-                      alt={item.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
+    <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {blogs?.length > 0 ? (
+          blogs.map((item) => (
+            <Link
+              to={`/blog/${item.id}`}
+              key={item.id}
+              className="group bg-white shadow-md rounded-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+            >
+              {/* Image Section */}
+              <div className="relative h-50 w-full overflow-hidden">
+                <img
+                  loading="lazy"
+                  src={item.img}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                {/* Category Tag */}
+                <span className="absolute top-4 left-4 bg-indigo-600 text-white text-xs font-medium px-3 py-1 rounded-full">
+                  {item.category}
+                </span>
+              </div>
+              {/* Content Section */}
+              <div className="p-5">
+                {/* Metadata */}
+                <div className="flex justify-between items-center text-sm text-gray-500 mb-3">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
+                    </svg>
+                    <span>{item.author}</span>
                   </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    <div className="flex justify-between items-center text-xs text-gray-500 mb-2">
-                      <span>✍️ {item.author}</span>
-                      <span>🕒 {item.createdAt}</span>
-                    </div>
-
-                    <h2 className="text-xl font-semibold text-gray-800 mb-2">{item.title}</h2>
-
-                    <p className="text-gray-600 text-sm line-clamp-4 mb-4">
-                      {item.content}
-                    </p>
-
-                    <div className="flex justify-end gap-4">
-                      <Link to={`/blog/${item.id}`} title="View Blog">
-                        <FaEye className="text-lg hover:scale-110 transition-transform" />
-                      </Link>
-
-                      <button
-                        onClick={() => handleDelete(item.id)}
-                        title="Delete Blog"
-                      >
-                        <FaTrash className="text-lg hover:scale-110 transition-transform text-red-600 cursor-pointer" />
-                      </button>
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span>{item.createdAt}</span>
                   </div>
                 </div>
-              ))
-            ) : (
-              <p>No blogs available.</p>
-            )
-          }
-
-        </div>
+                {/* Title */}
+                <h2 className="text-lg font-bold text-gray-900 line-clamp-2 mb-2">{item.title}</h2>
+                {/* Content Preview */}
+                <p className="text-gray-600 text-sm line-clamp-2 mb-4">{item.content}</p>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <p>No blogs available.</p>
+        )}
       </div>
-  )
-}
+    </div>
+  );
+};
 
-export default BlogList
+export default BlogList;
