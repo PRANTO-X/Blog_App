@@ -7,7 +7,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
     "createdAt": "01-08-2025 10:00",
     "category": "Technology",
-    "trending": true
+    "trending": true,
+    "breaking": false
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1516321310762-0c623066013b",
     "createdAt": "15-07-2025 09:30",
     "category": "Technology",
-    "trending": false
+    "trending": false,
+    "breaking": false
   },
   {
     "id": 3,
@@ -27,7 +29,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97",
     "createdAt": "20-07-2025 14:15",
     "category": "Technology",
-    "trending": true
+    "trending": true,
+    "breaking": false
   },
   {
     "id": 4,
@@ -37,7 +40,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3",
     "createdAt": "05-08-2025 16:45",
     "category": "Economy",
-    "trending": true
+    "trending": true,
+    "breaking": true
   },
   {
     "id": 5,
@@ -47,7 +51,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
     "createdAt": "10-07-2025 11:00",
     "category": "Economy",
-    "trending": false
+    "trending": false,
+    "breaking": false
   },
   {
     "id": 6,
@@ -57,7 +62,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
     "createdAt": "25-06-2025 13:20",
     "category": "Economy",
-    "trending": true
+    "trending": true,
+    "breaking": false
   },
   {
     "id": 7,
@@ -67,7 +73,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1516321310762-0c623066013b",
     "createdAt": "28-07-2025 14:30",
     "category": "AI",
-    "trending": true
+    "trending": true,
+    "breaking": false
   },
   {
     "id": 8,
@@ -77,7 +84,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
     "createdAt": "12-07-2025 10:45",
     "category": "AI",
-    "trending": true
+    "trending": true,
+    "breaking": false
   },
   {
     "id": 9,
@@ -87,7 +95,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1576091160399-1123a8f8c4b7",
     "createdAt": "01-07-2025 15:00",
     "category": "AI",
-    "trending": true
+    "trending": true,
+    "breaking": true
   },
   {
     "id": 10,
@@ -97,7 +106,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1522202176988-66273c2b6e3c",
     "createdAt": "20-07-2025 09:15",
     "category": "Job & Careers",
-    "trending": false
+    "trending": false,
+    "breaking": false
   },
   {
     "id": 11,
@@ -107,7 +117,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1598257006626-0c4f4d6f68a1",
     "createdAt": "10-06-2025 12:30",
     "category": "Job & Careers",
-    "trending": false
+    "trending": false,
+    "breaking": false
   },
   {
     "id": 12,
@@ -117,7 +128,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1516321310762-0c623066013b",
     "createdAt": "05-07-2025 11:00",
     "category": "Job & Careers",
-    "trending": false
+    "trending": false,
+    "breaking": false
   },
   {
     "id": 13,
@@ -127,7 +139,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1574375924355-0012436ed3c7",
     "createdAt": "03-08-2025 17:00",
     "category": "Entertainment",
-    "trending": true
+    "trending": true,
+    "breaking": false
   },
   {
     "id": 14,
@@ -137,7 +150,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1503095396549-807759245b35",
     "createdAt": "15-06-2025 19:00",
     "category": "Entertainment",
-    "trending": false
+    "trending": false,
+    "breaking": false
   },
   {
     "id": 15,
@@ -147,7 +161,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc",
     "createdAt": "20-06-2025 14:00",
     "category": "Entertainment",
-    "trending": true
+    "trending": true,
+    "breaking": false
   },
   {
     "id": 16,
@@ -157,7 +172,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
     "createdAt": "01-08-2025 12:00",
     "category": "Culture",
-    "trending": false
+    "trending": false,
+    "breaking": false
   },
   {
     "id": 17,
@@ -167,7 +183,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1505691938895-1758d7feb511",
     "createdAt": "10-07-2025 10:00",
     "category": "Culture",
-    "trending": false
+    "trending": false,
+    "breaking": false
   },
   {
     "id": 18,
@@ -177,7 +194,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
     "createdAt": "25-06-2025 15:30",
     "category": "Culture",
-    "trending": false
+    "trending": false,
+    "breaking": false
   },
   {
     "id": 19,
@@ -187,7 +205,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1517649763962-0c623066013b",
     "createdAt": "15-07-2025 11:20",
     "category": "Sports",
-    "trending": false
+    "trending": false,
+    "breaking": false
   },
   {
     "id": 20,
@@ -197,7 +216,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1526506118085-0e6a6d6b7b0b",
     "createdAt": "05-06-2025 14:00",
     "category": "Sports",
-    "trending": true
+    "trending": true,
+    "breaking": false
   },
   {
     "id": 21,
@@ -207,7 +227,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1542751371-adc38448a05e",
     "createdAt": "01-07-2025 16:00",
     "category": "Sports",
-    "trending": true
+    "trending": true,
+    "breaking": false
   },
   {
     "id": 22,
@@ -217,7 +238,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1500530855697-b5860a6d76a1",
     "createdAt": "03-08-2025 09:00",
     "category": "World",
-    "trending": true
+    "trending": true,
+    "breaking": true
   },
   {
     "id": 23,
@@ -227,7 +249,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1525186402429-2b23f1f6a317",
     "createdAt": "20-06-2025 11:00",
     "category": "World",
-    "trending": true
+    "trending": true,
+    "breaking": true
   },
   {
     "id": 24,
@@ -237,7 +260,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1519501025264-65ba15a82390",
     "createdAt": "15-07-2025 13:00",
     "category": "World",
-    "trending": false
+    "trending": false,
+    "breaking": false
   },
   {
     "id": 25,
@@ -247,7 +271,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1",
     "createdAt": "01-08-2025 10:30",
     "category": "Health",
-    "trending": true
+    "trending": true,
+    "breaking": true
   },
   {
     "id": 26,
@@ -257,7 +282,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1540420773420-3366772f4999",
     "createdAt": "10-07-2025 14:00",
     "category": "Health",
-    "trending": true
+    "trending": true,
+    "breaking": false
   },
   {
     "id": 27,
@@ -267,7 +293,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1554244933-d876d6c35d2a",
     "createdAt": "05-06-2025 12:00",
     "category": "Health",
-    "trending": true
+    "trending": true,
+    "breaking": false
   },
   {
     "id": 28,
@@ -277,7 +304,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1541873676-4a4e1a6a1762",
     "createdAt": "03-08-2025 15:00",
     "category": "Politics",
-    "trending": true
+    "trending": true,
+    "breaking": true
   },
   {
     "id": 29,
@@ -287,7 +315,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1516321310762-0c623066013b",
     "createdAt": "20-06-2025 10:00",
     "category": "Politics",
-    "trending": true
+    "trending": true,
+    "breaking": true
   },
   {
     "id": 30,
@@ -297,7 +326,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1576091160550-2173dba999ef",
     "createdAt": "15-07-2025 16:00",
     "category": "Politics",
-    "trending": true
+    "trending": true,
+    "breaking": false
   },
   {
     "id": 31,
@@ -307,7 +337,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1556761177-5973b3a7a6a7",
     "createdAt": "01-08-2025 11:00",
     "category": "Business",
-    "trending": true
+    "trending": true,
+    "breaking": false
   },
   {
     "id": 32,
@@ -317,7 +348,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d",
     "createdAt": "10-07-2025 13:00",
     "category": "Business",
-    "trending": false
+    "trending": false,
+    "breaking": false
   },
   {
     "id": 33,
@@ -327,7 +359,8 @@ const blogs = [
     "img": "https://images.unsplash.com/photo-1502945015378-0e284762f0e6",
     "createdAt": "05-06-2025 15:00",
     "category": "Business",
-    "trending": true
+    "trending": true,
+    "breaking": false
   }
 ]
 

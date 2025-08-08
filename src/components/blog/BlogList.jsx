@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { BlogContext } from '../../contexts/BlogProvider';
+import BlogCard from './BlogCard';
 
 const BlogList = () => {
   const { blogs } = useContext(BlogContext);
@@ -9,59 +10,7 @@ const BlogList = () => {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogs?.length > 0 ? (
-          blogs.map((item) => (
-            <Link
-              to={`/blog/${item.id}`}
-              key={item.id}
-              className="group bg-white shadow-md rounded-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-            >
-              {/* Image Section */}
-              <div className="relative h-50 w-full overflow-hidden">
-                <img
-                  loading="lazy"
-                  src={item.img}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                {/* Category Tag */}
-                <span className="absolute top-4 left-4 bg-indigo-600 text-white text-xs font-medium px-3 py-1 rounded-full">
-                  {item.category}
-                </span>
-              </div>
-              {/* Content Section */}
-              <div className="p-5">
-                {/* Metadata */}
-                <div className="flex justify-between items-center text-sm text-gray-500 mb-3">
-                  <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                    <span>{item.author}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span>{item.createdAt}</span>
-                  </div>
-                </div>
-                {/* Title */}
-                <h2 className="text-lg font-bold text-gray-900 line-clamp-2 mb-2">{item.title}</h2>
-                {/* Content Preview */}
-                <p className="text-gray-600 text-sm line-clamp-2 mb-4">{item.content}</p>
-              </div>
-            </Link>
-          ))
+          blogs.map(blog => <BlogCard key={blog.id} blog={blog} />)
         ) : (
           <p>No blogs available.</p>
         )}

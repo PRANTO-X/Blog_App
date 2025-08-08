@@ -13,7 +13,7 @@ const TrendingBlogs = () => {
             {trendingBlogs[0] && (
             <div className="">
                 <Link
-                to={`/blog/${trendingBlogs[0].id}`}
+                to={`/news/${trendingBlogs[0].id}`}
                 className="relative overflow-hidden block h-full group"
                 >
                     <div className=" h-full">
@@ -44,7 +44,7 @@ const TrendingBlogs = () => {
                     {trendingBlogs.slice(1, 3).map((item) => (
                         <Link
                         key={item.id}
-                        to={`/blog/${item.id}`}
+                        to={`/news/${item.id}`}
                         className="flex flex-col md:flex-row gap-2 flex-1 group"
                         >
                         {/* Image Section */}

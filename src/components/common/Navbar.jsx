@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { categoryList } from '../../assets/assets';
 import {FaFacebook,FaTwitter,FaInstagramSquare,FaYoutube,FaArrowRight,FaArrowLeft} from 'react-icons/fa';
 import { RiMenu2Fill } from 'react-icons/ri';
 import { RxCross2 } from 'react-icons/rx';
@@ -10,20 +11,7 @@ const Navbar = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
-  const categoryList = [
-    'All',
-    'Technology',
-    'Economy',
-    'AI',
-    'Job & Careers',
-    'Entertainment',
-    'Culture',
-    'Sports',
-    'World',
-    'Health',
-    'Politics',
-    'Business',
-  ];
+  
 
   // Scroll logic
   const updateScrollButtons = () => {
@@ -112,12 +100,12 @@ const Navbar = () => {
           >
             {categoryList.map((link, index) => (
               <li key={index}>
-                <a
+                <Link
                   className="font-bold hover:text-indigo-600 transition duration-300"
-                  href=""
+                  to={`/news?category=${encodeURIComponent(link)}`}
                 >
                   {link}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -132,28 +120,35 @@ const Navbar = () => {
       <div
         className={`${
           mobileMenu ? 'translate-x-0' : '-translate-x-full'
-        } sm:hidden transition-transform duration-300 ease-in-out fixed left-0 top-0 bottom-0 w-80 max-w-[90vh] min-h-screen bg-white z-[100]`}
+        } sm:hidden transition-transform duration-300 ease-in-out fixed left-0 top-0 bottom-0 w-80 max-h-[100vh] bg-white z-[100] flex flex-col`}
       >
-        <div>
+
+        <div className="flex flex-col h-full">
           <div className="flex items-center justify-between pb-5 p-5">
             <h3 className="text-xl text-indigo-600 font-bold">Menu</h3>
             <RxCross2 onClick={() => setMobileMenu(false)} className="text-2xl" />
           </div>
 
-          <div className="border-t border-gray-300 p-6">
+          <div className="border-t border-gray-300 p-6 flex-1 overflow-y-auto">
             <h4 className="uppercase text-gray-600 mb-4">Categories</h4>
-            <ul className="flex flex-col gap-4.5 pl-2.5 overflow-y-auto no-scrollbar">
+            <ul className="flex flex-col gap-4.5 pl-2.5 overflow-y-auto max-h-[calc(100vh-150px)]">
               {categoryList.map((link, index) => (
                 <li key={index}>
-                  <a className="hover:text-indigo-600 transition duration-300" href="">
+                  <Link
+                    className="font-bold hover:text-indigo-600 transition duration-300"
+                    to={`/news?category=${encodeURIComponent(link)}`}
+                    onClick={() => setMobileMenu(false)}
+                  >
                     {link}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
+        
       </div>
+
     </header>
   );
 };

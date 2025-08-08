@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { BlogContext } from '../contexts/BlogProvider';
+import { BlogContext } from '../../contexts/BlogProvider';
 
-const ShowBlog = () => {
+const BlogDetail = () => {
   const { blogs } = useContext(BlogContext);
   const { id } = useParams();
   const blog = blogs.find((item) => item.id === parseInt(id));
@@ -45,4 +45,4 @@ const ShowBlog = () => {
   );
 };
 
-export default ShowBlog;
+export default BlogDetail;

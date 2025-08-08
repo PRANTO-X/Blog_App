@@ -1,11 +1,11 @@
-import { createBrowserRouter } from 'react-router-dom'
-import { App } from '../App.jsx'
-import { lazy } from 'react'
+// src/routes/router.jsx
+import { createBrowserRouter } from 'react-router-dom';
+import { App } from '../App.jsx';
+import { lazy } from 'react';
 
-// Lazy-loaded components
-const Home = lazy(() => import('../pages/Home.jsx'))
-const CreateBlog = lazy(() => import('../pages/CreateBlog.jsx'))
-const ShowBlog = lazy(() => import('../pages/ShowBlog.jsx'))
+const Home = lazy(() => import('../pages/Home.jsx'));
+const CreateBlog = lazy(() => import('../pages/CreateBlog.jsx'));
+const News = lazy(() => import('../pages/News.jsx'));
 
 export const router = createBrowserRouter([
   {
@@ -14,7 +14,8 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'create', element: <CreateBlog /> },
-      { path: 'blog/:id', element: <ShowBlog /> }
-    ]
-  }
-])
+      { path: 'news', element: <News /> },
+      { path: 'news/:id', element: <News /> }, 
+    ],
+  },
+]);
