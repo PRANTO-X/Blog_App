@@ -100,12 +100,10 @@ const CategoryBlogs = () => {
             <header className="flex justify-between  items-center pb-6 mb-6 md:mb-8 border-b border-gray-200">
               <h1 className="text-xl md:text-3xl font-bold text-gray-900 ">{headerTitle}</h1>
 
-              <div>
+              <div className='pl-2'>
                 <button onClick={()=>setMobileFilter(true)} className='md:hidden px-2 py-1 border rounded-md flex items-center gap-1'>
                   <CiFilter className='size-5'/>Filters
-                </button>
-
-                
+                </button> 
               </div>
             </header>
 
