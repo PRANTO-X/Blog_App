@@ -9,7 +9,7 @@ const Home = () => {
 }, []);
 
   return (
-  <div className='container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 space-y-10'>  
+  <div className='container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 space-y-10'>  
   {/* Trending BLogs */}  
     <div>
       <div className="flex items-center gap-3.5  border-l-4 border-indigo-600 pl-2 mb-6">
@@ -22,10 +22,7 @@ const Home = () => {
 
     {/* Blog list */}
     <div>
-      <div className="flex items-center gap-3.5  border-l-4 border-indigo-600 pl-2 mb-6">
-      <h2 className='text-2xl md:text-3xl font-bold'>All Blogs</h2>
-      <span className='border-1 flex-1 border-indigo-600'></span>
-    </div>
+      
 
      <BlogList/>
     </div>

@@ -1,34 +1,64 @@
-import React, { useContext, useState } from 'react'
-import { BlogContext } from '../contexts/BlogProvider'
+import React, { useContext, useState } from 'react';
+import { BlogContext } from '../contexts/BlogProvider';
 import { useNavigate } from 'react-router-dom';
-const CreateBlog = () => {
+import { categoryList } from '../assets/assets'; 
 
-  const {addBlog} = useContext(BlogContext);
+const CreateBlog = () => {
+  const { addBlog } = useContext(BlogContext);
   const navigate = useNavigate();
 
-  const [title,setTitle] = useState('');
-  const [content,setContent] = useState('');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
   const [author, setAuthor] = useState('');
   const [img, setImg] = useState('');
+  const [category, setCategory] = useState('Technology'); 
+  const [trending, setTrending] = useState(false);
+  const [breaking, setBreaking] = useState(false);
 
-  const handleSubmit = (e)=>{
+  // Helper to format date as MM-DD-YYYY HH:mm
+  const getFormattedDate = () => {
+    const now = new Date();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    const yyyy = now.getFullYear();
+    const hh = String(now.getHours()).padStart(2, '0');
+    const min = String(now.getMinutes()).padStart(2, '0');
+    return `${mm}-${dd}-${yyyy} ${hh}:${min}`;
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    addBlog({title,content,author,img});
+    const newBlog = {
+      id: Math.floor(Math.random() * 100000),
+      title,
+      content,
+      author,
+      img,
+      category,
+      trending,
+      breaking,
+      createdAt: getFormattedDate(),
+    };
 
-    
+    addBlog(newBlog);
+
+    // Reset form
     setTitle('');
     setContent('');
     setAuthor('');
     setImg('');
+    setCategory('Technology');
+    setTrending(false);
+    setBreaking(false);
 
     navigate('/');
-  }
+  };
 
   return (
-    <div className="container mx-auto px-6 md:py-18 lg:py-24">
-      <div className="flex flex-col justify-center items-center  max-w-3xl mx-auto mt-8">
-        <h1 className="text-3xl font-bold mb-8 w-full">Create New Blog</h1>
+    <div className="container mx-auto px-6 pb-10">
+      <div className="flex flex-col justify-center items-center max-w-3xl mx-auto mt-8">
+        <h1 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 w-full">Create New Blog</h1>
 
         <form onSubmit={handleSubmit} className="space-y-6 w-full">
           <div>
@@ -82,16 +112,53 @@ const CreateBlog = () => {
             />
           </div>
 
+          <div>
+            <label className="block mb-2 font-semibold" htmlFor="category">Category *</label>
+            <select
+              id="category"
+              value={category}
+              onChange={e => setCategory(e.target.value)}
+              className="w-full border border-gray-300 rounded px-4 py-2"
+              required
+            >
+              {categoryList.filter(cat => cat !== 'All').map((cat, idx) => (
+                <option key={idx} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <label className="flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={trending}
+                onChange={e => setTrending(e.target.checked)}
+                className="mr-2"
+              />
+              Trending
+            </label>
+
+            <label className="flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={breaking}
+                onChange={e => setBreaking(e.target.checked)}
+                className="mr-2"
+              />
+              Breaking News
+            </label>
+          </div>
+
           <button
             type="submit"
-            className="bg-purple-700 hover:bg-purple-800 text-white font-semibold px-6 py-3 rounded"
+            className="bg-indigo-600 text-white font-semibold px-6 py-3 rounded"
           >
             Create Blog
           </button>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CreateBlog
+export default CreateBlog;

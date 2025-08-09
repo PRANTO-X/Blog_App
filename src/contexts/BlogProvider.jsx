@@ -14,11 +14,12 @@ const BlogContext = createContext();
   },[blogsState]);
 
   const addBlog = (newBlog) => {
-    setBlogsState(prev => [
-      ...prev,
-      { ...newBlog, id: Date.now(), createdAt: new Date().toLocaleString() }
-    ]);
+  setBlogsState(prev => [
+    { ...newBlog, id: Date.now(), createdAt: new Date().toLocaleString() },
+    ...prev
+  ]);
   };
+
 
 
   return (

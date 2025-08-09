@@ -18,7 +18,8 @@ const CategoryBlogs = () => {
 
   const [showBreaking,setShowBreaking] = useState(false);
   const [showTrending,setShowTrending] = useState(false);
-  const [mobileFilter,setMobileFilter] =useState(false)
+  const [mobileFilter,setMobileFilter] =useState(false);
+  const [searchTerm,setSearchTerm] = useState('');
 
   useEffect(() => {
       document.body.classList.toggle('overflow-hidden', mobileFilter);
@@ -37,22 +38,36 @@ const CategoryBlogs = () => {
     ).length;
   }, [blogs, category]);
 
-  const filteredBlogs = useMemo(() => {
-    let result = blogs;
+ const filteredBlogs = useMemo(() => {
+  let result = blogs;
 
-    if(category !== 'All'){
+  //  Search filter
+  if (searchTerm.trim() !== "") {
+    const words = searchTerm.toLowerCase().split(/\s+/).filter(Boolean);
+    result = result.filter(blog => {
+      const text = blog.title.toLowerCase();
+      return words.some(word => text.includes(word));
+    });
+  } else {
+    // Category filter 
+    if (category !== 'All') {
       result = result.filter(blog => blog.category === category);
     }
-    
-    if (showBreaking) {
-      result = result.filter(blog => blog.breaking);
-    }
+  }
 
-    if (showTrending) {
-      result = result.filter(blog => blog.trending);
-    }
-    return result;
-  }, [blogs, category,showBreaking,showTrending]);
+  //  Breaking/Trending filter
+  if (showBreaking || showTrending) {
+    result = result.filter(blog => {
+      if (showBreaking && blog.breaking) return true;
+      if (showTrending && blog.trending) return true;
+      return false;
+    });
+  }
+
+  return result;
+}, [blogs, category, showBreaking, showTrending, searchTerm]);
+
+
 
   const headerTitle = `${category}${showBreaking ? ' - Breaking News' : ''}${showTrending ? ' - Trending' : ''}`;
 
@@ -114,7 +129,12 @@ const CategoryBlogs = () => {
               <div className="sticky top-8 mt-3.5">
                   <div className="flex flex-col gap-5">
                     <div>
-                      <input type="text" placeholder='Search news...' className='border p-2 rounded-md focus:outline-indigo-600'/>
+                      <input 
+                      type="text" 
+                      value={searchTerm}
+                      onChange={(e)=> setSearchTerm(e.target.value)}
+                      placeholder='Search news...' 
+                      className='border p-2 rounded-md focus:outline-indigo-600'/>
                     </div>
 
                     <div className="mb-6">
@@ -193,6 +213,8 @@ const CategoryBlogs = () => {
               <div className="px-5">
                 <input
                   type="text"
+                  value={searchTerm}
+                  onChange={(e)=> setSearchTerm(e.target.value)}
                   placeholder="Search news..."
                   className="w-full border p-2 rounded-md focus:outline-indigo-600"
                 />
