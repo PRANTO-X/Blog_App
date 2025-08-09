@@ -2,7 +2,7 @@ import React from 'react'
 
 const Loader = () => {
   return (
-     <div className="animate-pulse bg-gray-100  flex-grow flex flex-col p-6 max-w-7xl mx-auto min-h-[calc(100vh-10rem-10rem)]">
+     <div className="animate-pulse bg-slate-50  flex-grow flex flex-col p-6 max-w-7xl mx-auto min-h-[calc(100vh-10rem-10rem)]">
       {/* Replace 4rem with your actual navbar and footer height */}
 
       {/* Title skeleton */}

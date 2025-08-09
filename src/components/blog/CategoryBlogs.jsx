@@ -257,7 +257,7 @@ const CategoryBlogs = () => {
 
                 <div className="flex flex-col">
                   <h3 className="text-lg font-semibold mb-2.5">Category</h3>
-                  <ul className="flex flex-col gap-3 pb-8 overflow-y-auto max-h-[calc(100vh-300px)]">
+                  <ul className="flex flex-col gap-3 pb-8 overflow-y-auto max-h-[calc(100vh-400px)]">
                     {categoryList.map((link, index) => {
                       const count =
                         link === 'All' ? null : blogs.filter((b) => b.category === link).length;
