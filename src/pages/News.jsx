@@ -5,23 +5,19 @@ import CategoryBlogs from '../components/blog/CategoryBlogs';
 import BlogDetail from '../components/blog/BlogDetail';
 
 const News = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category');
 
-  if (id) {
-    return <BlogDetail />;
+  if (slug) {
+    return <BlogDetail blogSlug={slug} />;
   }
 
   if (category) {
-    return <CategoryBlogs />;
+    return <CategoryBlogs categorySlug={category} />;
   }
 
-  return (
-    <div className="text-center py-10">
-      <h2 className="text-2xl font-bold">Please select a category</h2>
-    </div>
-  );
+  return <CategoryBlogs categorySlug="All" />;
 };
 
 export default News;

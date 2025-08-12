@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: 'create', element: <CreateBlog /> },
       { path: 'news', element: <News /> },
-      { path: 'news/:id', element: <News /> }, 
+      { path: 'news/:slug', element: <News /> }, 
     ],
   },
 ]);
