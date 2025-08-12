@@ -9,6 +9,7 @@ import { CiFilter } from "react-icons/ci";
 import { TfiFaceSad } from "react-icons/tfi";
 import { RxCross2 } from 'react-icons/rx';
 import { categoryList } from '../../assets/assets';
+import BlogCardSkeleton from '../../loader/BlogCardSekleton';
 
 
 const CategoryBlogs = () => {
@@ -20,6 +21,16 @@ const CategoryBlogs = () => {
   const [showTrending,setShowTrending] = useState(false);
   const [mobileFilter,setMobileFilter] =useState(false);
   const [searchTerm,setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(false); 
+
+  // Simulate loading when category changes
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [category, showBreaking, showTrending, searchTerm]);
 
   useEffect(() => {
       document.body.classList.toggle('overflow-hidden', mobileFilter);
@@ -107,21 +118,30 @@ const CategoryBlogs = () => {
               </div>
             </header>
 
-            
-            {filteredBlogs?.length > 0 ? (
+
+           {
+            loading ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {filteredBlogs.map(blog => <BlogCard key={blog.id} blog={blog} />)}
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <BlogCardSkeleton key={i} />
+                ))}
+              </div>
+            ) : filteredBlogs?.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {filteredBlogs.map(blog => (
+                  <BlogCard key={blog.id} blog={blog} />
+                ))}
               </div>
             ) : (
-            <div className="flex flex-col justify-center text-center items-center gap-2.5 md:gap-3.5 pt-6 sm:pt-12">
-              <TfiFaceSad className='size-18 md:size-24 lg:size-28'/>
-              <h1 className='text-xl md:text-3xl '>No Blog found</h1>
-              <p>Try adjusting your search or filter to find what you're looking for.</p>
-            </div>
-            )}
-            
-          </main>
-
+              <div className="flex flex-col justify-center text-center items-center gap-2.5 md:gap-3.5 pt-6 sm:pt-12">
+                <TfiFaceSad className='size-18 md:size-24 lg:size-28'/>
+                <h1 className='text-xl md:text-3xl'>No Blog found</h1>
+                <p>Try adjusting your search or filter to find what you're looking for.</p>
+              </div>
+            )
+          }
+   
+        </main>
           {/* Right side */}
           <aside className="hidden md:block w-full md:w-1/3 lg:w-1/4 border-l pl-5">
               <div className="sticky top-8 mt-3.5">
