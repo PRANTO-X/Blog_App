@@ -94,10 +94,9 @@ const Navbar = () => {
           </Link>
         </div>
         <Link
-          className="md:text-xl bg-indigo-600 text-white px-5 py-2 rounded-lg"
-          to="/create"
+          className="md:text-xl bg-indigo-600 text-white px-5 py-2 rounded-lg"  
         >
-          Create
+          Log in
         </Link>
       </nav>
 
@@ -193,7 +192,7 @@ const Navbar = () => {
                     <Link
                       className="font-bold hover:text-indigo-600 transition duration-300"
                       to={`/news?category=${encodeURIComponent(
-                        category.title
+                        category.slug
                       )}`}
                       onClick={() => setMobileMenu(false)}
                     >

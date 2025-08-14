@@ -9,7 +9,7 @@ const useBlogs = (filters = {}) => {
   // Helper function for blog data formatting
   const formatBlogData = (blog) => ({
     ...blog,
-    slug: blog.slug || blog.id, // Ensure slug is available for navigation
+    slug: blog.slug || blog.id, 
     imageUrl:
       blog.featured_image?.image ||
       blog.img ||
