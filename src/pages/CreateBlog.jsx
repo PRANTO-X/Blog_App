@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { categoryList } from '../assets/assets'; 
 
 const CreateBlog = () => {
-  const { addBlog } = useContext(BlogContext);
+  const { addBlog, loading } = useContext(BlogContext);
   const navigate = useNavigate();
 
   const [title, setTitle] = useState('');
@@ -14,6 +14,7 @@ const CreateBlog = () => {
   const [category, setCategory] = useState('Technology'); 
   const [trending, setTrending] = useState(false);
   const [breaking, setBreaking] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Helper to format date as MM-DD-YYYY HH:mm
   const getFormattedDate = () => {
@@ -26,11 +27,11 @@ const CreateBlog = () => {
     return `${mm}-${dd}-${yyyy} ${hh}:${min}`;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     const newBlog = {
-      id: Math.floor(Math.random() * 100000),
       title,
       content,
       author,
@@ -38,21 +39,27 @@ const CreateBlog = () => {
       category,
       trending,
       breaking,
-      createdAt: getFormattedDate(),
     };
 
-    addBlog(newBlog);
+    try {
+      await addBlog(newBlog);
 
-    // Reset form
-    setTitle('');
-    setContent('');
-    setAuthor('');
-    setImg('');
-    setCategory('Technology');
-    setTrending(false);
-    setBreaking(false);
+      // Reset form
+      setTitle('');
+      setContent('');
+      setAuthor('');
+      setImg('');
+      setCategory('Technology');
+      setTrending(false);
+      setBreaking(false);
 
-    navigate('/');
+      navigate('/');
+    } catch (error) {
+      console.error('Failed to create blog:', error);
+      alert('Failed to create blog. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -151,9 +158,17 @@ const CreateBlog = () => {
 
           <button
             type="submit"
-            className="bg-indigo-600 text-white font-semibold px-6 py-3 rounded"
+            disabled={isSubmitting || loading}
+            className="bg-indigo-600 text-white font-semibold px-6 py-3 rounded disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2"
           >
-            Create Blog
+            {isSubmitting || loading ? (
+              <>
+                <div className="animate-spin w-4 h-4 border border-white border-t-transparent rounded-full"></div>
+                Creating...
+              </>
+            ) : (
+              'Create Blog'
+            )}
           </button>
         </form>
       </div>

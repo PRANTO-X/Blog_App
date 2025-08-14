@@ -7,8 +7,4 @@ export const categoryList = [
     'Entertainment',
     'Culture',
     'Sports',
-    'World',
-    'Health',
-    'Politics',
-    'Business',
   ];
