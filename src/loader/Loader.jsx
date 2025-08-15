@@ -1,26 +1,19 @@
-import React from 'react'
+import React from "react";
 
 const Loader = () => {
   return (
-     <div className="animate-pulse bg-slate-50  flex-grow flex flex-col p-6 max-w-7xl mx-auto min-h-[calc(100vh-10rem-10rem)]">
-      {/* Replace 4rem with your actual navbar and footer height */}
+    <div className="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-50">
+      <div className="flex flex-col items-center">
+        {/* Spinner */}
+        <div className="w-16 h-16 border-4 border-t-indigo-600 border-gray-200 rounded-full animate-spin"></div>
 
-      {/* Title skeleton */}
-      <div className="h-10 bg-gray-300  rounded w-3/4 mb-8"></div>
-
-      {/* Image skeleton */}
-      <div className="relative w-full aspect-video bg-gray-300 rounded mb-8"></div>
-
-      {/* Paragraph skeletons */}
-      <div className="space-y-4 flex-grow">
-        <div className="h-4 bg-gray-300 rounded w-full"></div>
-        <div className="h-4 bg-gray-300 rounded w-full"></div>
-        <div className="h-4 bg-gray-300 rounded w-5/6"></div>
-        <div className="h-4 bg-gray-300 rounded w-4/6"></div>
-        <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+        {/* Optional loading text */}
+        <p className="mt-4 text-gray-700 dark:text-gray-300 text-lg font-medium">
+          Loading blogs...
+        </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Loader
+export default Loader;

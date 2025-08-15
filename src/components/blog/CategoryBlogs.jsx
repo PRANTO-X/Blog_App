@@ -1,6 +1,6 @@
 // src/components/blog/CategoryBlogs.jsx
 import React, { useMemo, useState, useEffect } from "react";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import BlogCard from "./BlogCard";
 import { IoMdHome } from "react-icons/io";
 import { FaAngleRight } from "react-icons/fa6";
@@ -9,10 +9,10 @@ import { TfiFaceSad } from "react-icons/tfi";
 import { RxCross2 } from "react-icons/rx";
 import useCategories from "../../hooks/useCategories";
 import useBlogs from "../../hooks/useBlogs";
+import BlogCardSkeleton from "../../loader/BlogCardSkeleton";
 
 const CategoryBlogs = ({ categorySlug: propCategorySlug }) => {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const categorySlug = propCategorySlug || searchParams.get("category");
   const tagsFilter = searchParams.get("tags");
 
@@ -25,47 +25,31 @@ const CategoryBlogs = ({ categorySlug: propCategorySlug }) => {
   const { categories } = useCategories();
 
   // Build dynamic filters for API
-  const filters = useMemo(() => {
-    const apiFilters = {
-      limit: 12,
-      offset: 0,
-    };
+const filters = useMemo(() => {
+  if (searchTerm.trim()) {
+    return { search: searchTerm.trim(), limit: 12, offset: 0 };
+  }
 
-    // Add tags filter (takes priority over category)
-    if (tagsFilter) {
-      apiFilters.tags = tagsFilter;
-    } else if (categorySlug && categorySlug !== "All") {
-      // Add category filter if not 'All' and no tags filter
-      const category = categories.find((cat) => cat.slug === categorySlug);
-      if (category) {
-        apiFilters.category = category.id;
-      }
-    }
+  const apiFilters = {
+    limit: 12,
+    offset: 0,
+  };
 
-    // Add breaking news filter
-    if (showBreaking) {
-      apiFilters.is_breaking_news = true;
-    }
+  if (tagsFilter) apiFilters.tags = tagsFilter;
 
-    // Add trending filter
-    if (showTrending) {
-      apiFilters.is_trending = true;
-    }
+  if (categorySlug && categorySlug !== "All") {
+    const category = categories.find((cat) => cat.slug === categorySlug);
+    if (!category) return null;
+    apiFilters.category = category.id;
+  }
 
-    // Add search filter
-    if (searchTerm.trim()) {
-      apiFilters.search = searchTerm.trim();
-    }
+  if (showBreaking) apiFilters.is_breaking_news = true;
+  if (showTrending) apiFilters.is_trending = true;
 
-    return apiFilters;
-  }, [
-    categorySlug,
-    categories,
-    showBreaking,
-    showTrending,
-    searchTerm,
-    tagsFilter,
-  ]);
+  return apiFilters;
+}, [categorySlug, categories, showBreaking, showTrending, tagsFilter, searchTerm]);
+
+
 
   // Fetch blogs with dynamic filters
   const { blogs, loading, error, refetch } = useBlogs(filters);
@@ -171,10 +155,7 @@ const CategoryBlogs = ({ categorySlug: propCategorySlug }) => {
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[...Array(6)].map((_, index) => (
-                <div
-                  key={index}
-                  className="animate-pulse bg-gray-300 h-64 rounded-lg"
-                ></div>
+                <BlogCardSkeleton key={index}/>
               ))}
             </div>
           ) : error ? (

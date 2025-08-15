@@ -10,7 +10,7 @@ const BlogList = () => {
   const { categories } = useCategories();
   
   // Fetch all blogs to organize by category
-  const { blogs } = useBlogs({ limit: 50 }); // Get more blogs to distribute across categories
+  const { blogs } = useBlogs({ limit: 50 }); 
   
 
   return (

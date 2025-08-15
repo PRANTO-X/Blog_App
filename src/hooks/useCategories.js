@@ -34,8 +34,6 @@ const useCategories = (filters = {}) => {
     fetchCategories();
   }, [JSON.stringify(filters)]);
 
-  // Debug: Log what we're returning
-  console.log("useCategories returning:", { categories, loading, error });
 
   return {
     categories,

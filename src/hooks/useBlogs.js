@@ -44,17 +44,18 @@ const useBlogs = (filters = {}) => {
     try {
       let response;
 
-      // If fetching by slug, use getBlogBySlug
-      if (filters.slug) {
-        response = await blogService.getBlogBySlug(filters.slug);
-        // If single blog response, wrap in results array format
-        if (response?.data && !response.data.results) {
-          response = { data: { results: [response.data] } };
+      // If fetching by slug, use getBlogByS0lug
+     if (filters.slug) {
+          response = await blogService.getBlogBySlug(filters.slug);
+          if (response?.data && !response.data.results) {
+            response = { data: { results: [response.data] } };
+          }
+        } else if (filters.search) {
+          response = await blogService.searchBlogs(filters.search, filters);
+        } else {
+          response = await blogService.getAllBlogs(filters);
         }
-      } else {
-        // Use getAllBlogs with provided filters
-        response = await blogService.getAllBlogs(filters);
-      }
+
 
       if (response?.data?.results) {
         const formattedBlogs = response.data.results.map(formatBlogData);
@@ -77,9 +78,25 @@ const useBlogs = (filters = {}) => {
   };
 
   // Fetch on mount or when filters change
-  useEffect(() => {
-    fetchBlogs();
-  }, [JSON.stringify(filters)]);
+   useEffect(() => {
+  if (filters === null) return; // explicitly skip if null
+
+  // Skip fetch only if no useful filters are set
+  const allEmpty =
+    filters.category === undefined &&
+    filters.tags === undefined &&
+    filters.slug === undefined &&
+    filters.is_trending === undefined &&
+    filters.is_breaking_news === undefined &&
+    filters.search === undefined &&
+    filters.limit === undefined; // added limit check so BlogList works
+
+  if (allEmpty) return;
+
+  fetchBlogs();
+}, [JSON.stringify(filters)]);
+
+
 
   return {
     blogs,
