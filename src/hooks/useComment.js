@@ -10,12 +10,16 @@ const useComment = ({ id }) => {
   const commentService = {
     getComment: async (id) => {
         try {
-            const response = await apiService.get(`/news/public/comments/${id}/`);
+            let response = await apiService.get(`/news/public/comments/${id}/`);
         if (response?.data) {
-            setComments([response.data]);
-            console.log("Comments: ",response.data);
-            
-        }
+            const commentsArray = [response.data]; 
+            setComments(commentsArray);
+            console.log("Comments: ",response.data);    
+        }  
+        // if (response?.data?.data) {
+        //     setComments([response.data.data]); 
+        //     console.log("Comments: ",response.data);
+        // } use both but not working
         } catch (err) {
             if (err.response?.status === 404) {
                 setComments([]); 
