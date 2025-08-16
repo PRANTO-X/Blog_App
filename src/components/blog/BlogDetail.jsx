@@ -5,6 +5,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import { TfiFaceSad } from "react-icons/tfi";
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
 import useBlogs from '../../hooks/useBlogs';
+import CommentBox from '../comment/CommentBox';
 
 const BlogDetail = ({ blogSlug }) => {
   const { slug: paramSlug } = useParams();
@@ -79,78 +80,85 @@ const BlogDetail = ({ blogSlug }) => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 py-5 md:py-8">
         {/* Left */}
         <main className='lg:col-span-8'>
-            <ul className='inline-flex items-center space-x-1 md:space-x-3 mb-8'>
-              <li className='inline-flex items-center'>
-                <Link to='/' className='flex gap-1.5 items-center text-gray-700 hover:text-indigo-600 transition-colors duration-200'>
-                    <IoMdHome /> Home
-                </Link>
-              </li>
+          {/* Blog detail */}
+           <div>
+              <ul className='inline-flex items-center space-x-1 md:space-x-3 mb-8'>
+                <li className='inline-flex items-center'>
+                  <Link to='/' className='flex gap-1.5 items-center text-gray-700 hover:text-indigo-600 transition-colors duration-200'>
+                      <IoMdHome /> Home
+                  </Link>
+                </li>
 
-              <li className='flex gap-2 items-center text-gray-700'>
-                <FaAngleRight />
-                <Link  className=' hover:text-indigo-600 transition-colors duration-200'>
-                      News
-                </Link>
-              </li>
-
-              <li className='flex gap-2 items-center text-gray-700'>
+                <li className='flex gap-2 items-center text-gray-700'>
                   <FaAngleRight />
-                  <span>{blog.title}</span>
-              </li>
-            </ul>
+                  <Link  className=' hover:text-indigo-600 transition-colors duration-200'>
+                        News
+                  </Link>
+                </li>
 
-            <header className='space-y-8'>
-              <div>
-                <span className=" bg-indigo-600 text-white font-medium px-4 py-2 rounded-full">{blog.categoryName}</span>
-              </div> 
+                <li className='flex gap-2 items-center text-gray-700'>
+                    <FaAngleRight />
+                    <span>{blog.title}</span>
+                </li>
+              </ul>
 
-              <h1 className='text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-4'>{blog.title}</h1>
+              <header className='space-y-8'>
+                <div>
+                  <span className=" bg-indigo-600 text-white font-medium px-4 py-2 rounded-full">{blog.categoryName}</span>
+                </div> 
 
-              <div className="flex flex-col sm:flex-row   gap-4  mb-6 pb-6 border-b">
-                <p className='  font-semibold  text-gray-800'>By <span className='ml-1 text-indigo-600'>{blog.author}</span></p>
-                <p className=" text-gray-600">Published: {blog.publishedDate}</p>
-              </div>
-            </header>
-            
-            <figure className='border-b pb-6 mb-4'>
-              <div className="relative aspect-video overflow-hidden mb-4">
-                <img src={blog.imageUrl} alt={blog.imageAlt} loading='lazy' className="w-full h-full object-cover" />
-              </div>
-              <div 
-                className='text-slate-900 leading-relaxed prose prose-lg max-w-none'
-                dangerouslySetInnerHTML={{ __html: blog.content }}
-              />
-            </figure>
+                <h1 className='text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-4'>{blog.title}</h1>
 
-            <footer>
-                <h2 className='text-xl font-bold text-slate-900'>Share this blog</h2>
-                 <div className="flex space-x-6 mt-2">
-                  <button
-                    aria-label="Share on Facebook"
-                    className="bg-blue-700 p-3 md:p-4 cursor-pointer rounded-full text-white"
-                    title='share on facebook'
-                  >
-                    <FaFacebookF size={20} />
-                  </button>
-
-                  <button
-                    aria-label="Share on Twitter"
-                    className="bg-sky-400 p-3 md:p-4 cursor-pointer rounded-full text-white"
-                    title='share on twitter'
-                  >
-                    <FaTwitter size={20} />
-                  </button>
-
-                  <button
-                    aria-label="Share on LinkedIn"
-                    className="bg-blue-400 p-3 md:p-4 cursor-pointer rounded-full text-white"
-                    title='share on linkdin'
-                  >
-                    <FaLinkedinIn size={20} />
-                  </button>
+                <div className="flex flex-col sm:flex-row   gap-4  mb-6 pb-6 border-b">
+                  <p className='  font-semibold  text-gray-800'>By <span className='ml-1 text-indigo-600'>{blog.author}</span></p>
+                  <p className=" text-gray-600">Published: {blog.publishedDate}</p>
                 </div>
-            </footer>
+              </header>
+            
+              <figure className='border-b pb-6 mb-4'>
+                <div className="relative aspect-video overflow-hidden mb-4">
+                  <img src={blog.imageUrl} alt={blog.imageAlt} loading='lazy' className="w-full h-full object-cover" />
+                </div>
+                <div 
+                  className='text-slate-900 leading-relaxed prose prose-lg max-w-none'
+                  dangerouslySetInnerHTML={{ __html: blog.content }}
+                />
+              </figure>
+
+              <footer>
+                  <h2 className='text-xl font-bold text-slate-900'>Share this blog</h2>
+                  <div className="flex space-x-6 mt-2">
+                    <button
+                      aria-label="Share on Facebook"
+                      className="bg-blue-700 p-3 md:p-4 cursor-pointer rounded-full text-white"
+                      title='share on facebook'
+                    >
+                      <FaFacebookF size={20} />
+                    </button>
+
+                    <button
+                      aria-label="Share on Twitter"
+                      className="bg-sky-400 p-3 md:p-4 cursor-pointer rounded-full text-white"
+                      title='share on twitter'
+                    >
+                      <FaTwitter size={20} />
+                    </button>
+
+                    <button
+                      aria-label="Share on LinkedIn"
+                      className="bg-blue-400 p-3 md:p-4 cursor-pointer rounded-full text-white"
+                      title='share on linkdin'
+                    >
+                      <FaLinkedinIn size={20} />
+                    </button>
+                  </div>
+              </footer>
+           </div>
+          {/* Comment box */}
+           <CommentBox blogId = {blog.id}/>
         </main>
+
+        
 
         {/* Right */}
         <aside className='lg:col-span-4'>
@@ -221,8 +229,10 @@ const BlogDetail = ({ blogSlug }) => {
                   <TfiFaceSad className='size-18 md:size-24 lg:size-28'/>
                   <h1 className='text-xl md:text-3xl '>No Blog found</h1>
                   <Link to="/" className="text-blue-600 underline mt-4 block">Go Back Home</Link>
-              </div>
+      </div>
   );
+
+
 };
 
 export default BlogDetail;
