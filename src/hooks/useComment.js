@@ -2,37 +2,23 @@
 import { useState, useEffect } from "react";
 import apiService from "../services/api/axios_instance";
 
-const useComment = ({ id }) => {
+const useComment = ({ blogId }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
 
   const commentService = {
-    getComment: async (id) => {
-        try {
-            let response = await apiService.get(`/news/public/comments/${id}/`);
-        if (response?.data) {
-            const commentsArray = [response.data]; 
-            setComments(commentsArray);
-            console.log("Comments: ",response.data);    
-        }  
-        // if (response?.data?.data) {
-        //     setComments([response.data.data]); 
-        //     console.log("Comments: ",response.data);
-        // } use both but not working
-        } catch (err) {
-            if (err.response?.status === 404) {
-                setComments([]); 
-        } else {
-            setError(err.message || "Failed to fetch comments");
-        }
-        }
-
+    getAllComments: async () => {
+      try {
+        return await apiService.get("/news/public/comments/");
+      } catch (err) {
+        throw err;
+      }
     },
 
-    postComment: async ({ news, name, email, content, parent = 0 }) => {
+    postComment: async ({ name, email, content, parent = 0 }) => {
       try {
-        const payload = { news, name, email, content, parent };
+        const payload = { news: blogId, name, email, content, parent };
         return await apiService.post(
           "/news/public/comment-submissions/submit-comment/",
           payload
@@ -49,31 +35,35 @@ const useComment = ({ id }) => {
     setError(null);
 
     try {
-      const response = await commentService.getComment(id);
-      if (response) {
-        setComments(response.data);
+      const response = await commentService.getAllComments();
+      if (response?.data) {
+        console.log(response.data);
+        
+        const blogComments = response.data.results.filter(
+          (comment) => String(comment.news) === String(blogId)
+        );
+        setComments(blogComments);
+      } else {
+        setComments([]);
       }
     } catch (err) {
       console.error("Failed to fetch comments from API:", err);
       setError(err.message || "Failed to fetch comments");
+      setComments([]);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (id) fetchComments();
-  }, [id]);
-
-  const reFetch = ()=>{
-    fetchComments();
-  };
+    if (blogId) fetchComments();
+  }, [blogId]);
 
   return {
     loading,
     error,
     comments,
-    reFetch,
+    reFetch: fetchComments,
     postComment: commentService.postComment,
   };
 };

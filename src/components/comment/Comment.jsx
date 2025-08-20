@@ -2,17 +2,25 @@
 import React, { useState } from "react";
 import { FaChevronRight } from "react-icons/fa6";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment,onReply }) => {
   const [showReply, setShowReply] = useState(false);
 
   const handleReply = () => setShowReply((prev) => !prev);
+
+  const getInitials = (name) => {
+    if (!name) return "";
+    const words = name.split(" ");
+    const initials = words.slice(0, 2).map(word => word[0].toUpperCase()).join("");
+    return initials;
+  };
+
 
   return (
     <div className="mb-6">
       <div className="flex space-x-3">
         {/* Logo */}
         <div className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-white text-lg font-medium bg-indigo-600">
-          {comment.name[0]?.toUpperCase()}
+          {getInitials(comment.name)}
         </div>
 
         <div className="flex-1 min-w-0">
@@ -35,7 +43,7 @@ const Comment = ({ comment }) => {
 
           {/* Reply */}
           <div className="flex items-center space-x-4">
-            <button className="text-xs cursor-pointer text-gray-500 hover:text-indigo-600 transition-colors font-medium">
+            <button onClick={()=> onReply(comment.id,comment.name)} className="text-xs cursor-pointer text-gray-500 hover:text-indigo-600 transition-colors font-medium">
               Reply
             </button>
             {comment.replies?.length > 0 && (
@@ -60,7 +68,7 @@ const Comment = ({ comment }) => {
           {showReply && comment.replies?.length > 0 && (
             <div className="ml-8 mt-4 space-y-4">
               {comment.replies.map((reply) => (
-                <Comment key={reply.id} comment={reply} />
+                <Comment key={reply.id} comment={reply} onReply={onReply} />
               ))}
             </div>
           )}
