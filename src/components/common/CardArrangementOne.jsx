@@ -6,13 +6,21 @@ export default function CardArrangementOne ({blogs=[], loading=false, error=null
 // Loading state
   if (loading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2 mb-10">
-        <div className="animate-pulse bg-gray-300 h-64 rounded-lg"></div>
-        <div className="flex flex-col gap-3">
-          <div className="animate-pulse bg-gray-300 h-28 rounded-lg"></div>
-          <div className="animate-pulse bg-gray-300 h-28 rounded-lg"></div>
+      <>
+        <div className="flex items-center gap-3.5 border-l-4 border-indigo-600 pl-2 mb-7">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold">Loading...</h2>
+          <span className="flex-1 border-t border-indigo-600"></span>
         </div>
-      </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2 mb-10">
+          <div className="animate-pulse bg-gray-300 h-64 rounded-lg"></div>
+          <div className="flex flex-col gap-3">
+            <div className="animate-pulse bg-gray-300 h-28 rounded-lg"></div>
+            <div className="animate-pulse bg-gray-300 h-28 rounded-lg"></div>
+          </div>
+        </div>
+      </>
+      
     );
   }
 
