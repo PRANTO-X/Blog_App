@@ -18,7 +18,9 @@ const Comment = ({ comment }) => {
         <div className="flex-1 min-w-0">
           {/* Detail*/}
           <div className="flex items-center space-x-2 mb-2">
-            <h4 className="text-sm font-semibold text-gray-900">{comment.name}</h4>
+            <h4 className="text-sm font-semibold text-gray-900">
+              {comment.name}
+            </h4>
             <span className="text-xs text-gray-500">•</span>
             <time
               className="text-xs text-gray-500"
@@ -49,9 +51,9 @@ const Comment = ({ comment }) => {
                   } transition duration-100`}
                   size={10}
                 />
-                {`${showReply ? "Hide" : "Show"} ${comment.replies.length} Reply${
-                  comment.replies.length > 1 ? "ies" : ""
-                }`}
+                {`${showReply ? "Hide" : "Show"} ${
+                  comment.replies.length
+                } Reply${comment.replies.length > 1 ? "ies" : ""}`}
               </button>
             )}
           </div>

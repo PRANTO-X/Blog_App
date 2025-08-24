@@ -6,28 +6,30 @@ const useComment = ({ id }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
-
   const commentService = {
     getComment: async (id) => {
-        try {
-            let response = await apiService.get(`/news/public/comments/${id}/`);
-        if (response?.data) {
-            const commentsArray = [response.data]; 
-            setComments(commentsArray);
-            console.log("Comments: ",response.data);    
-        }  
+      try {
+        let response = await apiService.get(`/news/public/comments/`, {
+          news: id,
+        });
+        setComments(response.data.results);
+
+        // if (response?.data) {
+        //   const commentsArray = [response.data];
+        //   setComments(commentsArray);
+        //   console.log("Comments: ", response.data);
+        // }
         // if (response?.data?.data) {
-        //     setComments([response.data.data]); 
+        //     setComments([response.data.data]);
         //     console.log("Comments: ",response.data);
         // } use both but not working
-        } catch (err) {
-            if (err.response?.status === 404) {
-                setComments([]); 
+      } catch (err) {
+        if (err.response?.status === 404) {
+          setComments([]);
         } else {
-            setError(err.message || "Failed to fetch comments");
+          setError(err.message || "Failed to fetch comments");
         }
-        }
-
+      }
     },
 
     postComment: async ({ news, name, email, content, parent = 0 }) => {
@@ -65,7 +67,7 @@ const useComment = ({ id }) => {
     if (id) fetchComments();
   }, [id]);
 
-  const reFetch = ()=>{
+  const reFetch = () => {
     fetchComments();
   };
 
